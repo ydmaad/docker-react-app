@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_install:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t minae/docker-react-app -f Dockerfile.dev .
+script:
+  - docker rn -e CI=true minae/docker-react-app npm run test -- ----coverage
+after_success:
+  - echo "Test Success"
